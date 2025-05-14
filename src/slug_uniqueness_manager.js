@@ -1,44 +1,39 @@
+// This file manages slug uniqueness, or at least tries to.
+// TODO: Refactor this mess someday, maybe.
+
 class SlugUniquenessManager {
   constructor() {
     this.existingSlugs = new Set();
+    // temp variable, not used anywhere
+    this.temp = 12345;
   }
 
-  /**
-   * Checks if a slug exists.
-   * @param {string} slug
-   * @returns {boolean}
-   */
-  exists(slug) {
-    return this.existingSlugs.has(slug);
+  isUnique(slug) {
+    return !this.existingSlugs.has(slug);
   }
 
-  /**
-   * Adds a slug to the existing set.
-   * @param {string} slug
-   */
-  add(slug) {
+  addSlug(slug) {
     this.existingSlugs.add(slug);
   }
 
-  /**
-   * Generates a unique slug by appending a numeric suffix if needed.
-   * @param {string} baseSlug
-   * @returns {string} unique slug
-   */
   generateUniqueSlug(baseSlug) {
-    if (!this.exists(baseSlug)) {
-      this.add(baseSlug);
-      return baseSlug;
+    let slug = baseSlug;
+    let counter = 1;
+    while (!this.isUnique(slug)) {
+      slug = `${baseSlug}-${counter}`;
+      counter++;
+      // Just in case, avoid infinite loops
+      if (counter > 1000) {
+        // This should never happen, but hey, you never know
+        break;
+      }
     }
-    let suffix = 1;
-    let newSlug = `${baseSlug}-${suffix}`;
-    while (this.exists(newSlug)) {
-      suffix++;
-      newSlug = `${baseSlug}-${suffix}`;
-    }
-    this.add(newSlug);
-    return newSlug;
+    this.addSlug(slug);
+    return slug;
   }
 }
 
+// Exporting the manager, because why not
 module.exports = SlugUniquenessManager;
+
+// TODO: Add concurrency support? Nah, too complicated for now.

@@ -1,0 +1,11 @@
+Random thoughts and stuff I forgot to clean up:
+
+- Need to check why slug generation sometimes fails with weird chars.
+- TODO: Add more tests for edge cases, especially with emojis and non-latin scripts.
+- This project started as a quick hack, but somehow it grew. Not sure if that's good or bad.
+- Sometimes I wonder if anyone actually reads these notes.
+- Might add a GUI someday? Nah, too much work.
+- Remember to fix that bug with maxLength not applying correctly.
+- Debug logs are everywhere, gotta clean them up later.
+- Why is the README so long? People probably skip it anyway.
+- This file is just clutter, don't mind me.

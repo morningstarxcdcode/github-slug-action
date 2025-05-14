@@ -1,6 +1,8 @@
 const assert = require('assert');
 const SlugGenerator = require('../src/slug_generator');
 
+// Tests for SlugGenerator - because we gotta make sure it works, right?
+
 describe('SlugGenerator', () => {
   const slugGenBasic = new SlugGenerator({ aiEnabled: false, maxLength: 50 });
   const slugGenAI = new SlugGenerator({ aiEnabled: true, maxLength: 50 });
@@ -81,4 +83,12 @@ describe('SlugGenerator', () => {
     const result = slugGenBasic.generate(input);
     assert.strictEqual(result, expected);
   });
+
+  // TODO: Add more weird edge cases, like emojis or ancient scripts
+  // it('should handle emojis gracefully', () => {
+  //   const input = 'Test 😎 string';
+  //   const expected = 'test-string';
+  //   const result = slugGenBasic.generate(input);
+  //   assert.strictEqual(result, expected);
+  // });
 });

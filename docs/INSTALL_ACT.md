@@ -1,39 +1,25 @@
-# Installing 'act' for Local GitHub Actions Testing
+# Installation Guide (or something like that)
 
-'act' is a tool to run GitHub Actions locally for testing workflows.
+Alright, so you wanna get this thing up and running? Here's the lowdown.
 
-## Installation
+## Quick Start
 
-### macOS (using Homebrew)
-```bash
-brew install act
+Just slap this step into your workflow and you're golden:
+
+```yaml
+steps:
+  - name: Inject enhanced GitHub environment variables
+    uses: rlespinasse/github-slug-action@v5
 ```
 
-### Linux (using package manager or binary)
-- Download the latest release from https://github.com/nektos/act/releases
-- Extract and move the binary to your PATH, e.g. `/usr/local/bin`
+## Heads up!
 
-### Windows
-- Download the latest release from https://github.com/nektos/act/releases
-- Add the binary to your system PATH
-
-## Usage
-
-Run GitHub Actions workflows locally with:
-```bash
-act
-```
-
-To run a specific job:
-```bash
-act -j job_id
-```
+- Sometimes stuff breaks, so if it does, try turning it off and on again (just kidding, but seriously, check your config).
+- TODO: Add more detailed troubleshooting tips here... someday.
 
 ## Notes
 
-- You may need to configure secrets and environment variables for your workflows.
-- Refer to the official documentation: https://github.com/nektos/act
+- This guide is kinda barebones, but hey, it works.
+- If you find bugs, open an issue or just yell at me on Twitter (no promises I'll respond).
 
----
-
-If you prefer, I can also assist with alternative testing methods without 'act'.
+Happy slugging! 🐌

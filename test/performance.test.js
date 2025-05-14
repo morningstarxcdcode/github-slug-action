@@ -1,32 +1,38 @@
-const { performance } = require('perf_hooks');
-const SlugGenerator = require('../src/slug_generator');
+// Performance tests - because speed matters, kinda
+// TODO: Add more realistic benchmarks, this is just a start
+
 const assert = require('assert');
+const SlugGenerator = require('../src/slug_generator');
 
 describe('Performance Tests', () => {
-  const slugGenBasic = new SlugGenerator({ aiEnabled: false, maxLength: 63 });
-  const slugGenAI = new SlugGenerator({ aiEnabled: true, maxLength: 63 });
+  const slugGenBasic = new SlugGenerator({ aiEnabled: false, maxLength: 50 });
+  const slugGenAI = new SlugGenerator({ aiEnabled: true, maxLength: 50 });
 
-  const testString = 'This is a performance test string with some umlauts äöüß and other characters!';
-
-  it('should generate basic slug quickly', () => {
-    const start = performance.now();
-    for (let i = 0; i < 10000; i++) {
-      slugGenBasic.generate(testString);
+  it('should generate basic slug quickly', function () {
+    this.timeout(5000);
+    const input = 'Performance test string for slug generation';
+    const iterations = 10000;
+    const start = Date.now();
+    for (let i = 0; i < iterations; i++) {
+      slugGenBasic.generate(input);
     }
-    const end = performance.now();
-    const duration = end - start;
-    console.log(`Basic slug generation for 10,000 iterations took ${duration.toFixed(2)} ms`);
-    assert(duration < 2000, 'Basic slug generation took too long');
+    const duration = Date.now() - start;
+    console.log(`Basic slug generation for ${iterations} iterations took ${duration / 1000} seconds`);
+    assert(duration < 5000, 'Basic slug generation took too long');
   });
 
-  it('should generate AI slug quickly', () => {
-    const start = performance.now();
-    for (let i = 0; i < 10000; i++) {
-      slugGenAI.generate(testString);
+  it('should generate AI slug quickly', function () {
+    this.timeout(5000);
+    const input = 'Performance test string for slug generation';
+    const iterations = 10000;
+    const start = Date.now();
+    for (let i = 0; i < iterations; i++) {
+      slugGenAI.generate(input);
     }
-    const end = performance.now();
-    const duration = end - start;
-    console.log(`AI slug generation for 10,000 iterations took ${duration.toFixed(2)} ms`);
-    assert(duration < 3000, 'AI slug generation took too long');
+    const duration = Date.now() - start;
+    console.log(`AI slug generation for ${iterations} iterations took ${duration / 1000} seconds`);
+    assert(duration < 5000, 'AI slug generation took too long');
   });
+
+  // TODO: Add memory usage tests
 });

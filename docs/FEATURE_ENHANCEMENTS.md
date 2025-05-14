@@ -1,21 +1,23 @@
-# Feature Enhancements
+# Feature Enhancements (or whatever)
 
-## Multi-language Support Expansion
+So, this doc is supposed to list all the cool new stuff we added. Honestly, it's kinda messy right now.
 
-- Added language-specific transliteration rules for better slug accuracy.
-- Example: German umlauts and special characters are now properly transliterated (ä -> ae, ö -> oe, ü -> ue, ß -> ss).
-- Support for specifying language codes to customize slug generation behavior.
-- Improved AI-powered slug generation to respect language-specific rules.
+## Recent Stuff
 
-## Testing
+- Added AI-powered slug generation (still experimental, don't blame me if it breaks)
+- Improved slug uniqueness manager (kinda works, sometimes)
+- Added some TODOs everywhere because I keep forgetting stuff
 
-- Added unit tests for new language-specific rules, including German.
-- Tests cover both basic and AI-powered slug generation modes.
+## Notes
 
-## Next Steps
+- Not sure if all features are fully tested, but hey, it works on my machine.
+- TODO: Write better docs here, maybe with examples or something.
+- This file might get deleted or rewritten, so don't get too attached.
 
-- Continue adding more language-specific rules.
-- Enhance AI slug generation with more advanced NLP techniques.
-- Develop plugin system for extensibility.
-- Expand CLI options and improve documentation.
-- Implement thorough testing and CI/CD integration.
+## Random Thoughts
+
+- Should we add a dark mode? Nah, too much work.
+- Maybe add a CLI spinner? That'd be cool.
+- This project started as a joke, but now it's serious(ish).
+
+# End of file. Or is it?

@@ -1,31 +1,31 @@
 # GitHub Slug action
 
-This GitHub Action will expose the slug/short values of [some GitHub environment variables][default-environment-variables] inside your GitHub workflow.
+So yeah, this GitHub Action thingy exposes slug/short values of [some GitHub environment variables][default-environment-variables] inside your GitHub workflow. Pretty neat, huh?
 
 ## Overview
 
-`SLUG` on a variable will
+`SLUG` on a variable will:
 
-- put the variable content in lower case
-- replace any character by `-` except `0-9`, `a-z`, `.`, and `_`
-- remove leading `-` characters
-- limit the string size to 63 characters
-- remove trailing `-` characters
+- put the variable content in lower case (because uppercase is overrated)
+- replace any character by `-` except `0-9`, `a-z`, `.`, and `_` (yep, dashes everywhere)
+- remove leading `-` characters (no one likes those)
+- limit the string size to 63 characters (because size matters)
+- remove trailing `-` characters (bye bye trailing dashes)
 
-### Others Slug-ish variables are available
+### Other Slug-ish variables are available (yeah, we got options)
 
 - `SLUG_URL` on a variable to have a `slug` variable compliant to be used in a URL
-  - Like `SLUG` but `.`, and `_` are also replaced by `-`
+  - Like `SLUG` but `.`, and `_` are also replaced by `-` (because URLs are picky)
 - `SHORT` on a variable will limit the string size to [~8 characters](#with-another-length-for-short-values)
-  - Useful for _sha_ value
+  - Useful for _sha_ value (short and sweet)
 - `<KEY>_PART` on a variable will give a part of a variable defined by a key
   - Like `GITHUB_REPOSITORY_OWNER_PART` for the owner part of `GITHUB_REPOSITORY`
 - `<VAR>_CS` on other variables to keep the value case-sensitive
-  - Like `GITHUB_REF_SLUG_CS`
+  - Like `GITHUB_REF_SLUG_CS` (case matters sometimes)
 
 ## Installation
 
-Add this step to your workflow
+Add this step to your workflow (don't forget it!)
 
 ```yaml
 steps:
@@ -34,14 +34,14 @@ steps:
 ```
 
 > [!CAUTION]
-> Use [Dependabot][dependabot] to maintain your `github-slug-action` version updated in your GitHub workflows.
+> Use [Dependabot][dependabot] to keep your `github-slug-action` version up to date. Seriously, don't be lazy.
 
 ## Configuration Options
 
 > [!TIP]
-> Check for more [examples][examples] (OS usage, URL use, ...)
+> Check out more [examples][examples] (OS usage, URL use, and other stuff)
 
-### With a prefix
+### With a prefix (because sometimes you want to be fancy)
 
 ```yaml
 steps:
@@ -51,50 +51,168 @@ steps:
       prefix: CI_
 ```
 
-### With another max length for slug values
+### With another max length for slug values (go big or go home)
 
 ```yaml
 steps:
   - name: Inject enhanced GitHub environment variables
     uses: rlespinasse/github-slug-action@v5
     with:
-      slug-maxlength: 80 # Use 'nolimit' to remove use of a max length (Default to 63)
+      slug-maxlength: 80 # Use 'nolimit' to remove max length (Default is 63)
 ```
 
-### With another length for short values
+### With another length for short values (because 8 chars might not cut it)
 
 ```yaml
 steps:
   - name: Inject enhanced GitHub environment variables
     uses: rlespinasse/github-slug-action@v5
     with:
-      short-length: 7 # By default it's up to Git to decide, use 8 to have the v3.x behaviour
+      short-length: 7 # Default is Git's call, 8 for old behavior
 ```
 
-The length of a short sha depends on the size of **your repository** and can differ over time :
+The length of a short sha depends on **your repo size** and can change over time:
 
-- set `7` to keep the `small repository` behaviour,
-- set `8` to reproduce `v3` behaviour,
-- set `4` as the minimum length possible.
+- set `7` to keep the `small repo` vibe,
+- set `8` to get the old `v3` feel,
+- set `4` as the bare minimum (not recommended, but hey, you do you).
 
 > [!WARNING]
-> If you leave it empty, you need to checkout the source first to let Git decide the size by itself by using [`git rev-parse`][git-revparse] behaviour.
+> Leaving it empty means you gotta checkout the source first so Git can decide the size using [`git rev-parse`][git-revparse].
 >
-> The default is the effective value of the [core.abbrev][git-core-abbrev] configuration variable.
+> Default is whatever [core.abbrev][git-core-abbrev] says.
 
 ## Available Environment variables
 
 > [!TIP]
-> If you don't find what you search for
->
-> - Read more about [available `GitHub` variables](docs/github-variables.md), and propose a [new custom variable][custom-variable].
-> - Use your own variable with [slugify-value][slugify-value], or [shortify-git-revision][shortify-git-revision] for git reference.
+> Can't find what you want? Try these:
+
+> - Read more about [available `GitHub` variables](docs/github-variables.md), and suggest a [new custom variable][custom-variable].
+> - Use your own variable with [slugify-value][slugify-value], or [shortify-git-revision][shortify-git-revision] for git refs.
 
 ### Enhanced variables
 
 - `GITHUB_REF_POINT` will contain the reference name (branch or tag)
   - based on `GITHUB_HEAD_REF` in a [`pull-request*`][webhooks-and-events] event context,
-  - based on `GITHUB_REF_NAME` in other event context.
+  - based on `GITHUB_REF_NAME` in other event contexts.
+
+> [!NOTE]
+> All enhanced variables are available in all **slug** formats.
+
+### Partial variables
+
+| Variable | Description |
+| -------- | ----------- |
+| [GITHUB_REPOSITORY_OWNER_PART](docs/partial-variables.md#github_repository_owner_part) | The Owner part of GITHUB_REPOSITORY variable |
+| [GITHUB_REPOSITORY_NAME_PART](docs/partial-variables.md#github_repository_name_part) | The Repository name part of GITHUB_REPOSITORY variable |
+
+### Slug variables
+
+> [!TIP]
+> Available in standard and case-sensitive (`_CS`) versions.
+
+| Variable | Description |
+| -------- | ----------- |
+| [GITHUB_REPOSITORY_SLUG](docs/slug-variables.md#github_repository_slug) | The owner<create_file>
+<path>README.md</path>
+<content>
+# GitHub Slug action
+
+So yeah, this GitHub Action thingy exposes slug/short values of [some GitHub environment variables][default-environment-variables] inside your GitHub workflow. Pretty neat, huh?
+
+## Overview
+
+`SLUG` on a variable will:
+
+- put the variable content in lower case (because uppercase is overrated)
+- replace any character by `-` except `0-9`, `a-z`, `.`, and `_` (yep, dashes everywhere)
+- remove leading `-` characters (no one likes those)
+- limit the string size to 63 characters (because size matters)
+- remove trailing `-` characters (bye bye trailing dashes)
+
+### Other Slug-ish variables are available (yeah, we got options)
+
+- `SLUG_URL` on a variable to have a `slug` variable compliant to be used in a URL
+  - Like `SLUG` but `.`, and `_` are also replaced by `-` (because URLs are picky)
+- `SHORT` on a variable will limit the string size to [~8 characters](#with-another-length-for-short-values)
+  - Useful for _sha_ value (short and sweet)
+- `<KEY>_PART` on a variable will give a part of a variable defined by a key
+  - Like `GITHUB_REPOSITORY_OWNER_PART` for the owner part of `GITHUB_REPOSITORY`
+- `<VAR>_CS` on other variables to keep the value case-sensitive
+  - Like `GITHUB_REF_SLUG_CS` (case matters sometimes)
+
+## Installation
+
+Add this step to your workflow (don't forget it!)
+
+```yaml
+steps:
+  - name: Inject enhanced GitHub environment variables
+    uses: rlespinasse/github-slug-action@v5
+```
+
+> [!CAUTION]
+> Use [Dependabot][dependabot] to keep your `github-slug-action` version up to date. Seriously, don't be lazy.
+
+## Configuration Options
+
+> [!TIP]
+> Check out more [examples][examples] (OS usage, URL use, and other stuff)
+
+### With a prefix (because sometimes you want to be fancy)
+
+```yaml
+steps:
+  - name: Inject enhanced GitHub environment variables
+    uses: rlespinasse/github-slug-action@v5
+    with:
+      prefix: CI_
+```
+
+### With another max length for slug values (go big or go home)
+
+```yaml
+steps:
+  - name: Inject enhanced GitHub environment variables
+    uses: rlespinasse/github-slug-action@v5
+    with:
+      slug-maxlength: 80 # Use 'nolimit' to remove max length (Default is 63)
+```
+
+### With another length for short values (because 8 chars might not cut it)
+
+```yaml
+steps:
+  - name: Inject enhanced GitHub environment variables
+    uses: rlespinasse/github-slug-action@v5
+    with:
+      short-length: 7 # Default is Git's call, 8 for old behavior
+```
+
+The length of a short sha depends on **your repo size** and can change over time:
+
+- set `7` to keep the `small repo` vibe,
+- set `8` to get the old `v3` feel,
+- set `4` as the bare minimum (not recommended, but hey, you do you).
+
+> [!WARNING]
+> Leaving it empty means you gotta checkout the source first so Git can decide the size using [`git rev-parse`][git-revparse].
+>
+> Default is whatever [core.abbrev][git-core-abbrev] says.
+
+## Available Environment variables
+
+> [!TIP]
+> Can't find what you want? Try these:
+
+> - Read more about [available `GitHub` variables](docs/github-variables.md), and suggest a [new custom variable][custom-variable].
+> - Use your own variable with [slugify-value][slugify-value], or [shortify-git-revision][shortify-git-revision] for git refs.
+
+### Enhanced variables
+
+- `GITHUB_REF_POINT` will contain the reference name (branch or tag)
+  - based on `GITHUB_HEAD_REF` in a [`pull-request*`][webhooks-and-events] event context,
+  - based on `GITHUB_REF_NAME` in other event contexts.
 
 > [!NOTE]
 > All enhanced variables are available in all **slug** formats.
@@ -124,7 +242,7 @@ The length of a short sha depends on the size of **your repository** and can dif
 
 ### URL-Safe Slug variables
 
-Same as slug variables but URL-compliant
+Same as slug variables but URL-compliant (because URLs are picky)
 
 > [!TIP]
 > Available in standard and case-sensitive (`_CS`) versions.

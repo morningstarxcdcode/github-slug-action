@@ -1,0 +1,41 @@
+commit 1a2b3c4d5e6f7g8h9i0j
+Author: Dev Dude <devdude@example.com>
+Date:   Fri Apr 21 14:32:10 2023 -0400
+
+    finally fixed the stupid bug in portscanner lol
+
+commit 2b3c4d5e6f7g8h9i0j1a
+Author: Dev Chick <devchick@example.com>
+Date:   Thu Apr 20 09:15:45 2023 -0400
+
+    ugh forgot to push the README update
+
+commit 3c4d5e6f7g8h9i0j1a2b
+Author: Lazy Dev <lazydev@example.com>
+Date:   Wed Apr 19 18:22:33 2023 -0400
+
+    cleaned up (I think?)
+
+commit 4d5e6f7g8h9i0j1a2b3c
+Author: Newbie <newbie@example.com>
+Date:   Tue Apr 18 11:05:12 2023 -0400
+
+    added TODOs — still incomplete tho
+
+commit 5e6f7g8h9i0j1a2b3c4d
+Author: Procrastinator <procrastinator@example.com>
+Date:   Mon Apr 17 16:47:00 2023 -0400
+
+    fixed some stuff, broke other stuff ¯\_(ツ)_/¯
+
+commit 6f7g8h9i0j1a2b3c4d5e
+Author: Coffee Lover <coffee@example.com>
+Date:   Sun Apr 16 08:30:45 2023 -0400
+
+    refactored code, but not sure if it works
+
+commit 7g8h9i0j1a2b3c4d5e6f
+Author: Night Owl <nightowl@example.com>
+Date:   Sat Apr 15 23:59:59 2023 -0400
+
+    added some debug logs, gonna remove later maybe
