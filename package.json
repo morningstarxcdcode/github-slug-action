@@ -1,0 +1,19 @@
+{
+  "name": "github-slug-action-advanced",
+  "version": "1.0.0",
+  "description": "Advanced GitHub Slug Action with AI-powered slug generation and more",
+  "main": "src/slug_generator.js",
+  "bin": {
+    "sluggen": "src/cli.js"
+  },
+  "scripts": {
+    "test": "echo \"No tests yet\""
+  },
+  "dependencies": {
+    "transliteration": "^2.3.5",
+    "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "mocha": "^11.2.2"
+  }
+}

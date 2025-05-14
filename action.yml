@@ -27,12 +27,16 @@ runs:
         INPUT_SHORT_LENGTH: ${{ inputs.short-length }}
 
     # From Environment Variables
-    - uses: rlespinasse/slugify-value@v1.4.0
-      with:
-        key: GITHUB_REPOSITORY
-        value: ${{ github.repository }}
-        prefix: ${{ inputs.prefix }}
-        slug-maxlength: ${{ inputs.slug-maxlength }}
+    - run: node $GITHUB_ACTION_PATH/src/cli.js --value="${{ github.repository }}" --maxLength=${{ inputs.slug-maxlength }}
+      id: slugify-github-repository
+      shell: bash
+    # Additional steps for other variables can be added similarly
+    - run: node $GITHUB_ACTION_PATH/src/cli.js --commitMessage="${{ github.event.head_commit.message }}" --maxLength=${{ inputs.slug-maxlength }}
+      id: slugify-commit-message
+      shell: bash
+    - run: node $GITHUB_ACTION_PATH/src/cli.js --prTitle="${{ github.event.pull_request.title }}" --maxLength=${{ inputs.slug-maxlength }}
+      id: slugify-pr-title
+      shell: bash
     - uses: rlespinasse/slugify-value@v1.4.0
       with:
         key: GITHUB_REF

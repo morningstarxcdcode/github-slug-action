@@ -1,0 +1,63 @@
+name: Integration Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test-github-slug-action:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run GitHub Slug Action with repository input
+        uses: ./
+        id: slugify-repo
+        with:
+          slug-maxlength: 50
+
+      - name: Run GitHub Slug Action with commit message input
+        uses: ./
+        id: slugify-commit-message
+        with:
+          slug-maxlength: 50
+        env:
+          GITHUB_EVENT_NAME: push
+          GITHUB_EVENT_PATH: ${{ github.event_path }}
+          GITHUB_HEAD_REF: ''
+          GITHUB_REF_NAME: ''
+          GITHUB_REF: ''
+          GITHUB_EVENT_REF: ''
+          GITHUB_EVENT_PULL_REQUEST_HEAD_SHA: ''
+          GITHUB_EVENT_PULL_REQUEST_BASE_SHA: ''
+          GITHUB_EVENT_PULL_REQUEST_NUMBER: ''
+          GITHUB_EVENT_PULL_REQUEST_TITLE: 'Add new feature for advanced slug generation'
+          GITHUB_EVENT_HEAD_COMMIT_MESSAGE: 'Fix bug in user login flow'
+
+      - name: Run GitHub Slug Action with PR title input
+        uses: ./
+        id: slugify-pr-title
+        with:
+          slug-maxlength: 50
+        env:
+          GITHUB_EVENT_NAME: pull_request
+          GITHUB_EVENT_PATH: ${{ github.event_path }}
+          GITHUB_HEAD_REF: ''
+          GITHUB_REF_NAME: ''
+          GITHUB_REF: ''
+          GITHUB_EVENT_REF: ''
+          GITHUB_EVENT_PULL_REQUEST_HEAD_SHA: ''
+          GITHUB_EVENT_PULL_REQUEST_BASE_SHA: ''
+          GITHUB_EVENT_PULL_REQUEST_NUMBER: ''
+          GITHUB_EVENT_PULL_REQUEST_TITLE: 'Add new feature for advanced slug generation'
+          GITHUB_EVENT_HEAD_COMMIT_MESSAGE: 'Fix bug in user login flow'
+
+      - name: Verify outputs
+        run: |
+          echo "Slugify repo: ${{ steps.slugify-repo.outputs.slug }}"
+          echo "Slugify commit message: ${{ steps.slugify-commit-message.outputs.slug }}"
+          echo "Slugify PR title: ${{ steps.slugify-pr-title.outputs.slug }}"
