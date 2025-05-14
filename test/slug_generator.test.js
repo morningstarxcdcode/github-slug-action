@@ -46,4 +46,39 @@ describe('SlugGenerator', () => {
     const result = slugGenBasic.generate('');
     assert.strictEqual(result, '');
   });
+
+  it('should apply German language specific rules', () => {
+    const slugGenGerman = new SlugGenerator({ language: 'de', maxLength: 50 });
+    const input = 'Füße über Ölstraße groß';
+    const expected = 'fuesse-ueber-oelstrasse-gross';
+    const result = slugGenGerman.generate(input);
+    assert.strictEqual(result, expected);
+  });
+
+  // Edge case tests
+  it('should handle input with only special characters', () => {
+    const input = '!@#$%^&*()_+=';
+    const expected = '_';
+    const result = slugGenBasic.generate(input);
+    assert.strictEqual(result, expected);
+  });
+
+  it('should handle very long input by truncating', () => {
+    const input = 'a'.repeat(100);
+    const expected = 'a'.repeat(50);
+    const result = slugGenBasic.generate(input);
+    assert.strictEqual(result, expected);
+  });
+
+  it('should handle null or undefined input gracefully', () => {
+    assert.strictEqual(slugGenBasic.generate(null), '');
+    assert.strictEqual(slugGenBasic.generate(undefined), '');
+  });
+
+  it('should handle input with mixed languages', () => {
+    const input = 'Test тест Test';
+    const expected = 'test-test-test';
+    const result = slugGenBasic.generate(input);
+    assert.strictEqual(result, expected);
+  });
 });
