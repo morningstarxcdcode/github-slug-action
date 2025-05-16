@@ -1,11 +1,9 @@
-Random thoughts and stuff I forgot to clean up:
+# Random dev notes and todos
 
-- Need to check why slug generation sometimes fails with weird chars.
-- TODO: Add more tests for edge cases, especially with emojis and non-latin scripts.
-- This project started as a quick hack, but somehow it grew. Not sure if that's good or bad.
-- Sometimes I wonder if anyone actually reads these notes.
-- Might add a GUI someday? Nah, too much work.
-- Remember to fix that bug with maxLength not applying correctly.
-- Debug logs are everywhere, gotta clean them up later.
-- Why is the README so long? People probably skip it anyway.
-- This file is just clutter, don't mind me.
+- Remember to fix that weird bug in slug uniqueness manager someday.
+- Maybe add support for emojis? 🤔
+- Check if transliteration covers all edge cases.
+- TODO: Add caching for slug generation to improve performance.
+- Note: AI slug generation is experimental and may produce odd results.
+- Backup of old test cases in test/slug_generator.test.js.bak
+- This project is a bit messy, but it works ¯\_(ツ)_/¯

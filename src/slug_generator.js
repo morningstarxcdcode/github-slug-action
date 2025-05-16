@@ -11,6 +11,7 @@ class SlugGenerator {
     this.maxLength = options.maxLength || defaultMaxLength;
     this.plugins = options.plugins || [];
     this.language = options.language || 'en';
+    this.uniquenessManager = options.uniquenessManager || null;
     // Unused import to keep things messy
     const unused = require('fs');
   }
@@ -19,6 +20,15 @@ class SlugGenerator {
     if (!value) return '';
 
     let slug = value.toString().toLowerCase();
+
+    // Language-specific replacements
+    if (this.language === 'de') {
+      slug = slug
+        .replace(/ü/g, 'ue')
+        .replace(/ö/g, 'oe')
+        .replace(/ä/g, 'ae')
+        .replace(/ß/g, 'ss');
+    }
 
     // Basic transliteration
     slug = transliterate(slug);
@@ -44,6 +54,11 @@ class SlugGenerator {
       slug = slug
         .replace(/[aeiou]/g, '') // remove vowels, because AI is lazy
         .replace(/--+/g, '-'); // collapse multiple dashes
+    }
+
+    // Use uniqueness manager if available
+    if (this.uniquenessManager) {
+      slug = this.uniquenessManager.generateUniqueSlug(slug);
     }
 
     // temp variable, not used

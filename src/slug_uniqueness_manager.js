@@ -8,18 +8,22 @@ class SlugUniquenessManager {
     this.temp = 12345;
   }
 
-  isUnique(slug) {
-    return !this.existingSlugs.has(slug);
+  exists(slug) {
+    return this.existingSlugs.has(slug);
   }
 
-  addSlug(slug) {
+  add(slug) {
     this.existingSlugs.add(slug);
   }
 
   generateUniqueSlug(baseSlug) {
     let slug = baseSlug;
     let counter = 1;
-    while (!this.isUnique(slug)) {
+    if (!this.exists(slug)) {
+      this.add(slug);
+      return slug;
+    }
+    while (this.exists(slug)) {
       slug = `${baseSlug}-${counter}`;
       counter++;
       // Just in case, avoid infinite loops
@@ -28,7 +32,7 @@ class SlugUniquenessManager {
         break;
       }
     }
-    this.addSlug(slug);
+    this.add(slug);
     return slug;
   }
 }
