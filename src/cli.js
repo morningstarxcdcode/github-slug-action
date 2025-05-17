@@ -35,6 +35,12 @@ const argv = yargs
     description: 'Pull request title to generate slug from (fancy!)',
     type: 'string',
   })
+  .option('verbose', {
+    alias: 'b',
+    description: 'Show detailed output (verbose mode)',
+    type: 'boolean',
+    default: false,
+  })
   .help()
   .alias('help', 'h').argv;
 
@@ -49,18 +55,27 @@ const commitSlug = new CommitSlug({
   maxLength: argv.maxLength,
 });
 
+// Helper to print output based on verbosity
+function printOutput(source, slug) {
+  if (argv.verbose) {
+    console.log(`Generated slug from ${source}: ${slug}`);
+  } else {
+    console.log(slug);
+  }
+}
+
 // Main logic: pick what to slugify
 if (argv.commitMessage) {
   const slug = commitSlug.generateFromCommitMessage(argv.commitMessage);
-  console.log(slug);
+  printOutput('commit message', slug);
 } else if (argv.prTitle) {
   const slug = commitSlug.generateFromPRTitle(argv.prTitle);
-  console.log(slug);
+  printOutput('pull request title', slug);
 } else if (argv.value) {
   const slug = slugGen.generate(argv.value);
-  console.log(slug);
+  printOutput('value', slug);
 } else {
-  console.error('Please provide a value, commitMessage, or prTitle to generate slug. Don\'t be shy!');
+  console.error('Error: Please provide a value, commitMessage, or prTitle to generate slug. Use --help to see options.');
   process.exit(1);
 }
 

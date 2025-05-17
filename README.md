@@ -1,33 +1,33 @@
 # GitHub Slug Action (Humanized Edition)
 
-Hey there! This is a GitHub Action that helps you generate slugified versions of GitHub environment variables. Perfect for when you want clean, URL-friendly strings in your workflows without the hassle.
+Welcome to GitHub Slug Action — your friendly helper for turning GitHub environment variables into clean, URL-friendly slugs. Whether you’re automating workflows or just want neat strings, this action has you covered.
 
 ## Features
 
-- Converts strings to lowercase slugs with dashes.
-- AI-powered slug generation (experimental, kinda lazy but fun).
-- Supports multiple languages (German umlauts handled, more to come).
-- Ensures slug uniqueness with suffixes like `-1`, `-2`, etc.
-- Configurable max length and prefixes.
-- Loads of TODOs and quirks because, well, it’s human-made.
+- Converts any string into a lowercase, dash-separated slug.
+- Experimental AI-powered slug generation for smarter results.
+- Supports multiple languages, including German umlauts (more coming soon).
+- Guarantees unique slugs by appending suffixes like `-1`, `-2`, etc.
+- Customizable max length and prefix options.
+- Real-world quirks and TODOs included — because perfection is overrated.
 
 ## Installation
 
-Just add this step to your GitHub workflow:
+Add this step to your GitHub workflow to get started:
 
 ```yaml
 steps:
-  - name: Inject slugified env vars
+  - name: Inject slugified environment variables
     uses: rlespinasse/github-slug-action@v5
 ```
 
 ## Usage
 
-You can generate slugs from:
+Generate slugs from:
 
 - Commit messages
 - Pull request titles
-- Any custom string value
+- Any custom string you provide
 
 Example:
 
@@ -39,31 +39,31 @@ steps:
       commitMessage: "Fix all the bugs!"
 ```
 
-Config options:
+### Configuration Options
 
 - `ai`: Enable AI-powered slugging (default: false)
-- `maxLength`: Max length of slug (default: 63)
-- `prefix`: Add a prefix to all generated variables
+- `maxLength`: Maximum slug length (default: 63)
+- `prefix`: Prefix to add to all generated variables
 
 ## Environment Variables
 
-This action exposes enhanced environment variables like:
+This action exposes enhanced environment variables such as:
 
 - `GITHUB_REF_SLUG`
 - `GITHUB_REPOSITORY_SLUG`
 - `GITHUB_SHA_SHORT`
 - And many more, including URL-safe and partial variants.
 
-Check the docs for the full list.
+For the full list, check the documentation.
 
 ## Contributing
 
-Feel free to fork, open issues, or send PRs. Just beware, this project is a bit messy and full of TODOs!
+Contributions are welcome! Feel free to fork, open issues, or submit pull requests. Just a heads-up: the project is a bit messy and full of TODOs — that’s part of its charm.
 
 ## License
 
-MIT License. Do whatever you want, just don’t blame me if it breaks.
+MIT License. Use it however you want, but don’t blame me if it breaks.
 
 ---
 
-*Note: This README is intentionally casual and imperfect, just like the codebase. Enjoy!*
+*This README embraces imperfection and a human touch — enjoy!*
